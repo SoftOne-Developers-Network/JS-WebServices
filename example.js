@@ -21,13 +21,15 @@ function responseError(obj)
 }
 
 
+//This function returns a JSON Object for fastest results use sql2jsonstr
 function sql2json(sql)
 {
-	var resp={}; 
+  var resp={}; 
   var ds = X.GETSQLDATASET(sql, null);
 	if (ds.RECORDCOUNT>0){
 		resp.success=true;
-		resp.data = eval(ds.JSON); 
+		/* resp.data = eval(ds.JSON); delays and wasting memory */
+		resp.data = ds.JSON; 
 		return resp;
 	}else{
 		resp.success=false;
@@ -35,6 +37,18 @@ function sql2json(sql)
 		return resp;
 	}
 }
+
+//This function returns a JSON data as string
+function sql2jsonstr(sql)
+{
+  var ds = X.GETSQLDATASET(sql, null);
+  if (ds){
+    return  ds.JSON;
+  }else{
+    return "";
+  }
+}
+
 
 
 function getVat(obj)
