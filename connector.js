@@ -15,6 +15,7 @@ function responseError(obj)
   return resp;
 }
 
+//This function returns a JSON Object for fastest results use sql2jsonstr
 function sql2json(sql)
 {
   var resp={}; 
@@ -30,6 +31,17 @@ function sql2json(sql)
 		return resp;
 	}
 }
+
+function sql2jsonstr(sql)
+{
+  var ds = X.GETSQLDATASET(sql, null);
+  if (ds){
+    return  ds.JSON;
+  }else{
+    return "";
+  }
+}
+
 
 function formatDateTime(dt)
 {
