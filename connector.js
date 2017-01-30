@@ -21,7 +21,8 @@ function sql2json(sql)
   var ds = X.GETSQLDATASET(sql, null);
 	if (ds.RECORDCOUNT>0){
 		resp.success=true;
-		resp.data = eval(ds.JSON); 
+		//resp.data = eval(ds.JSON); //delays and wasting memory
+		resp.data = ds.JSON; 
 		return resp;
 	}else{
 		resp.success=false;
